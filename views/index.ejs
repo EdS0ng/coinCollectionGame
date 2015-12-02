@@ -4,15 +4,43 @@
   <meta charset="UTF-8">
   <title>Coins</title>
   <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body ng-app="coinGame">
   <h1>Coin Collecting</h1>
   
-  <div class="container">
-    <button ng-click="startGame()">Play as Guest</button>
-    
-  </div>
+  <div class="well" ui-view></div>
 
+
+
+
+
+  <script id="game.html" type="text/ng-template">
+    <table id="table">
+      <tr ng-repeat="row in matrix track by $index" ng-init="parentIndex=$index">
+        <td ng-repeat="cell in row track by $index"></td>
+      </tr>
+    </table>
+    <table id="overlay">
+      <tr ng-repeat="overlayRow in overlayMatrix track by $index" ng-init="parentIndex=$index">
+        <td ng-repeat="overlayCell in overlayRow track by $index"></td>
+      </tr>
+    </table>
+  </script>
+
+  <script id="home.html" type="text/ng-template">
+    <div>
+      <button ng-click="startGame()">Play as Guest</button>
+    </div>
+  </script>
+
+  <script src="vendor/angular/angular.min.js"></script>
+  <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="vendor/socket.io-client/socket.io.js"></script>
+  <script src="js/game/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
   <!-- <div>
     <label for="name">Name:</label>
     <input type="text" id="name">
@@ -27,9 +55,3 @@
     
   </ul>
  -->
-  <script src="vendor/angular/angular.min.js"></script>
-  <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script src="vendor/socket.io-client/socket.io.js"></script>
-  <script src="js/main.js"></script>
-</body>
-</html>
