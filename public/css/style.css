@@ -14,22 +14,36 @@ h5 {
   background-image: url("http://www.clker.com/cliparts/c/4/6/5/1369917350694835763dollar_coin.png");
   background-size: 100%;
   background-repeat: no-repeat;
+  /*transition: opacity .25s ease-in-out;*/
+  /*-webkit-transition: opacity .25s ease-in-out;*/
 }
 
 .treasure {
   background-image: url("http://icongal.com/gallery/image/11751/gold.png");
   background-size: 100%;
   background-repeat: no-repeat;
+
 }
 
 .player1 {
-  background-image: url("http://snag.gy/LrKOz.jpg");
+  background-image: url("http://4.bp.blogspot.com/-bqWhbBJNaF8/USO5cqcgUyI/AAAAAAAAAic/xZoJnHIDt_c/s1600/animaldrawing01_sheridan_portfolio_camillo_clauser.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
+  /*background: red;*/
+  }
+
+.player1:hover {
+  background-color: green;
+  cursor: pointer;
+  -webkit-transition: background-color 2s ease-out;
+  -moz-transition: background-color 2s ease-out;
+  -o-transition: background-color 2s ease-out;
+  transition: background-color 2s ease-out;
 }
 
+
 .player2 {
-  background-image: url("http://snag.gy/mpZMk.jpg");
+  background-image: url("file:///Users/Missy/Desktop/Screen%20Shot%202015-12-02%20at%206.16.40%20PM.png");
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -178,3 +192,39 @@ td {
 #mainContainer{
   margin-top:1vw;
 }
+
+ div.fields>input {
+  outline: none;
+  width: 100%;
+  border: 2px solid #92CDCF;
+  margin: 5px;
+}
+
+h2 {
+  color: #445878;
+  background-color: #EEEFF7;
+  border: 3px solid #92CDCF;
+}
+
+.btn {
+    background-color: #445878;
+    border: 3px solid #92CDCF;
+    color: #EEEFF7;
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    }
+
+#register {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input {
+  width: 80px;
+  height: 40px;
+}
+

@@ -16,16 +16,26 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl:'game.html',
     controller:'gameCtrl'
   })
-  // .state('search', {
-  //   url:'/search',
-  //   templateUrl:'search.html',
-  //   controller:'searchCtrl'
-  // })
+   .state('register', {
+    url: '/register',
+    templateUrl: 'register.html'
+  })
+  .state('login', {
+    url: '/login',
+    templateUrl: 'login.html'
+  })
+
 });
 
 app.controller('startCtrl', function ($scope, $state){
   $scope.startGame = function (){
     $state.go('gameStart');
+  }
+  $scope.goRegister = function(){
+    $state.go('register');
+  }
+  $scope.goLogin = function(){
+    $state.go('login');
   }
 })
 
@@ -33,7 +43,7 @@ app.factory('socket', function ($rootScope) {
   var socket = io.connect('http://localhost:3000');
   return {
     on: function (eventName, callback) {
-      socket.on(eventName, function () {  
+      socket.on(eventName, function () {
         var args = arguments;
         $rootScope.$apply(function () {
           callback.apply(socket, args);

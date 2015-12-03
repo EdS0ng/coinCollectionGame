@@ -12,10 +12,6 @@
   </div>
   <div ui-view></div>
 
-
-
-
-
   <script id="game.html" type="text/ng-template">
     <div class="well" id="instructions">
       <p><strong>Instructions:</strong> Move your player around the board and try to collect all the coins!</p>
@@ -106,11 +102,96 @@
     </div>
   </script>
 
-  <script id="home.html" type="text/ng-template">
-    <div>
-      <button ng-click="startGame()">Play as Guest</button>
+<script id="home.html" type="text/ng-template">
+  <div class="home1" class="col-sm-6">
+    <button id="playAsGuest" type="button" class="btn btn-md btn-primary btn-block" ng-click="startGame()">Play as Guest</button>
+  </div>
+  <div class="home2" class="col-sm-6">
+    <button ng-click="goLogin()" id="register-login" type="button" class="btn btn-md btn-primary btn-block"><i class="fa fa-times"></i> Login</button>
+  </div>
+  <div  class="home3" class="col-sm-6" >
+    <button ng-click="goRegister()" class="btn btn-md btn-success btn-block confirm"><i class="fa fa-check"></i> Register</button>
+  </div>
+</script>
+
+<script id="register.html" type="text/ng-template">
+
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      <h2 class="text-center">Register</h2>
+      <hr class="colorgraph"/>
+      <form id="register" action="#" method="post">
+        <fieldset>
+          <div class="fields">
+            <input id="username" type="text" placeholder="Name" required="required" autofocus="autofocus"/>
+          </div>
+          <div class="fields">
+            <input id="password" type="password" placeholder="Password" required="required"/>
+          </div>
+          <div class="fields">
+            <input id="_password" type="password" placeholder="Password" required="required"/>
+          </div>
+            <div class="col-sm-6">
+              <button id="register" type="submit" class="btn btn-md btn-success btn-block confirm"><i class="fa fa-check"></i> Register</button>
+          </div>
+        </fieldset>
+      </form>
     </div>
-  </script>
+  </div>
+</script>
+
+<script id="login.html" type="text/ng-template">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      <h2 class="text-center">Login Page</h2>
+      <hr class="colorgraph"/>
+      <form id="login" action="#" method="post">
+        <fieldset>
+          <div class="fields">
+            <input id="username" type="text" placeholder="Username" required="required" autofocus="autofocus"/>
+          </div>
+          <div class="fields">
+            <input id="password" type="password" placeholder="Password" required="required"/>
+          </div>
+          <div class="fields">
+            <div class="col-sm-6">
+              <button type="submit" class="btn btn-md btn-success btn-block confirm"><i class="fa fa-check"></i> Login</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</script>
+<!--
+    <div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+      <h2 class="text-center">Create Profile</h2>
+      <hr class="colorgraph"/>
+      <form id="register" action="#" method="post">
+        <fieldset>
+          <div class="fields">
+            <input id="username" type="text" placeholder="Name" required="required" autofocus="autofocus"/>
+          </div>
+          <div class="fields">
+            <input id="password" type="password" placeholder="Password" required="required"/>
+          </div>
+          <div class="fields">
+            <input id="_password" type="password" placeholder="Password" required="required"/>
+          </div>
+          <div class="fields">
+            <div class="col-sm-6">
+              <button id="register-login" type="button" class="btn btn-md btn-primary btn-block"><i class="fa fa-times"></i> Login</button>
+            </div>
+            <div class="col-sm-6">
+              <button type="submit" class="btn btn-md btn-success btn-block confirm"><i class="fa fa-check"></i> Register</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div> -->
+<!-- </script> -->
 
   <script src="vendor/angular/angular.min.js"></script>
   <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -128,10 +209,10 @@
   <div>
     <label for="message">Message</label>
     <input type="text" id="message">
-    <button id='send'>Send</button>    
+    <button id='send'>Send</button>
   </div>
 
   <ul id="messages">
-    
+
   </ul>
  -->
