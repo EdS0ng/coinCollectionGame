@@ -18,13 +18,13 @@
     </div>
     <div id="mainContainer">
       <table id="table">
-        <tr ng-repeat="row in matrix track by $index" ng-init="parentIndex=$index">
+        <tr class="player1" ng-repeat="row in matrix track by $index" ng-init="parentIndex=$index">
           <td ng-repeat="cell in row track by $index" class="{{cell}}"></td>
         </tr>
       </table>
       <table id="overlay">
         <tr ng-repeat="overlayRow in overlayMatrix track by $index" ng-init="parentIndex=$index">
-          <td ng-repeat="overlayCell in overlayRow track by $index" class="current-{{overlayCell}}"></td>
+          <td  ng-repeat="overlayCell in overlayRow track by $index" class="current-{{overlayCell}}"></td>
         </tr>
       </table>
 
@@ -163,35 +163,6 @@
     </div>
   </div>
 </script>
-<!--
-    <div class="row">
-    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-      <h2 class="text-center">Create Profile</h2>
-      <hr class="colorgraph"/>
-      <form id="register" action="#" method="post">
-        <fieldset>
-          <div class="fields">
-            <input id="username" type="text" placeholder="Name" required="required" autofocus="autofocus"/>
-          </div>
-          <div class="fields">
-            <input id="password" type="password" placeholder="Password" required="required"/>
-          </div>
-          <div class="fields">
-            <input id="_password" type="password" placeholder="Password" required="required"/>
-          </div>
-          <div class="fields">
-            <div class="col-sm-6">
-              <button id="register-login" type="button" class="btn btn-md btn-primary btn-block"><i class="fa fa-times"></i> Login</button>
-            </div>
-            <div class="col-sm-6">
-              <button type="submit" class="btn btn-md btn-success btn-block confirm"><i class="fa fa-check"></i> Register</button>
-            </div>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-  </div> -->
-<!-- </script> -->
 
   <script src="vendor/angular/angular.min.js"></script>
   <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
