@@ -7,25 +7,103 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-app="coinGame">
-  <h1>Coin Collecting</h1>
-  
-  <div class="well" ui-view></div>
+  <div id="header">
+    <h1>Coin Collecting</h1>
+  </div>
+  <div ui-view></div>
 
 
 
 
 
   <script id="game.html" type="text/ng-template">
-    <table id="table">
-      <tr ng-repeat="row in matrix track by $index" ng-init="parentIndex=$index">
-        <td ng-repeat="cell in row track by $index"></td>
-      </tr>
-    </table>
-    <table id="overlay">
-      <tr ng-repeat="overlayRow in overlayMatrix track by $index" ng-init="parentIndex=$index">
-        <td ng-repeat="overlayCell in overlayRow track by $index"></td>
-      </tr>
-    </table>
+    <div class="well" id="instructions">
+      <p><strong>Instructions:</strong> Move your player around the board and try to collect all the coins!</p>
+    </div>
+    <div id="mainContainer">
+      <table id="table">
+        <tr ng-repeat="row in matrix track by $index" ng-init="parentIndex=$index">
+          <td ng-repeat="cell in row track by $index" class="{{cell}}"></td>
+        </tr>
+      </table>
+      <table id="overlay">
+        <tr ng-repeat="overlayRow in overlayMatrix track by $index" ng-init="parentIndex=$index">
+          <td ng-repeat="overlayCell in overlayRow track by $index" class="current-{{overlayCell}}"></td>
+        </tr>
+      </table>
+
+      <div>
+        <table id ="scoreBoard">
+          <tr>
+            <th id="scores">Scores:
+            </th>
+          </tr>
+          <tr id="player1">
+            <td>Player 1:</td>
+            <td id="square">{{score}}</td>
+          </tr>
+          <tr id="player2">
+            <td>Player 2</td>
+            <td id="square">{{0}}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <table id="highScores">
+        <tr>
+          <th id="headerHighScores">Highest Scores:
+          </th>
+        </tr>
+          <th id="player" scope="col">Player Name:</th>
+          <th id="highScore" scope="col">Score:</th>
+        <tr>
+          <td id="player">Player 1</td>
+          <td id="highScore">200</td>
+        </tr>
+         <tr>
+          <td id="player">Player 2</td>
+          <td id="highScore">180</td>
+        </tr>
+         <tr>
+          <td id="player">Player 3</td>
+          <td id="highScore">150</td>
+        </tr>
+         <tr>
+          <td id="player">Player 4</td>
+          <td id="highScore">150</td>
+        </tr>
+         <tr>
+          <td id="player">Player 5</td>
+          <td id="highScore">140</td>
+        </tr>
+         <tr>
+          <td id="player">Player 6</td>
+          <td id="highScore">120</td>
+        </tr>
+         <tr>
+          <td id="player">Player 7</td>
+          <td id="highScore">100</td>
+        </tr>
+         <tr>
+          <td id="player">Player 1</td>
+          <td id="highScore">80</td>
+        </tr>
+         <tr>
+          <td id="player">Player 8</td>
+          <td id="highScore">60</td>
+        </tr>
+         <tr>
+          <td id="player">Player 9</td>
+          <td id="highScore">50</td>
+        </tr>
+         <tr>
+          <td id="player">Player 10</td>
+          <td id="highScore">50</td>
+        </tr>
+        </table>
+      </div>
+    </div>
   </script>
 
   <script id="home.html" type="text/ng-template">
@@ -37,6 +115,8 @@
   <script src="vendor/angular/angular.min.js"></script>
   <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="vendor/socket.io-client/socket.io.js"></script>
+  <script src="js/gameboard/gameboard.js"></script>
+  <script src="js/movement/movement.js"></script>
   <script src="js/game/game.js"></script>
   <script src="js/main.js"></script>
 </body>
