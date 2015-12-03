@@ -18,7 +18,7 @@
     </div>
     <div id="mainContainer">
       <table id="table">
-        <tr class="player1" ng-repeat="row in matrix track by $index" ng-init="parentIndex=$index">
+        <tr ng-repeat="row in matrix track by $index" ng-init="parentIndex=$index">
           <td ng-repeat="cell in row track by $index" class="{{cell}}"></td>
         </tr>
       </table>
