@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('playerMovement', ['gameBoard'])
-.service('movementSvc', function ($document, gameBoardSvc, $rootScope, scoreSvc){
+angular.module('playerMovement', [])
+.service('movementSvc', function ($document){
   var keycodeObj = {
     37: 'left',
     38: 'up',
@@ -24,17 +24,7 @@ angular.module('playerMovement', ['gameBoard'])
     }
   }
 
-  this.setNewPosition = function (move){
-    var oldX = gameBoardSvc.currentPos[0];
-    var oldY = gameBoardSvc.currentPos[1];
-    var x = move[0];
-    var y = move[1];
-    gameBoardSvc.overlay[oldX][oldY] = false;
-    $rootScope.$apply(gameBoardSvc.overlay[oldX+x][oldY+y] = true);
-    gameBoardSvc.currentPos = [oldX+x, oldY+y];
-  }
-
-  this.start = function (){
+  this.start = function (cb){
     self = this;
     $document.bind('keydown', function (e) {
       var arrowKey = keycodeObj[e.which];
@@ -42,29 +32,9 @@ angular.module('playerMovement', ['gameBoard'])
       if (arrowKey) {
         e.preventDefault();
         var move = self.calculateMovement(arrowKey);
-        self.setNewPosition(move);
-        scoreSvc.checkForCoins();
+        cb(move);
       }
     });
   }
 
-  this.calculateMovement = function (move){
-    if (movementMap[move]){
-      return movementMap[move]();
-    }
-  }
-
-})
-.service('scoreSvc', function (gameBoardSvc){
-  this.score = 0;
-  
-  this.checkForCoins = function (){
-    var self = this;
-    var x = gameBoardSvc.currentPos[0];
-    var y = gameBoardSvc.currentPos[1];
-    if (gameBoardSvc.grid[x][y]==='coin'){
-      gameBoardSvc.grid[x][y]=null;
-      self.score++;
-    }
-  }
 })

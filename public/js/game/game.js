@@ -1,57 +1,56 @@
 'use strict';
 
-var app = angular.module('Game', ['gameBoard', 'playerMovement']);
+var app = angular.module('Game', ['gameBoard','playerMovement', 'btford.socket-js']);
+app.factory('Socket', function (socketFactory) {
+  var socket = io();
+  return socketFactory({
+    ioSocket: socket
+  });
+});
 
-app.controller('gameCtrl', function (gameBoardSvc, $scope, movementSvc, coinSvc, scoreSvc){
-  gameBoardSvc.buildGrid();
-  $scope.matrix = gameBoardSvc.grid;
-  gameBoardSvc.buildOverlay();
-  $scope.overlayMatrix = gameBoardSvc.overlay
-  gameBoardSvc.setStartPosition();
-  $scope.score = scoreSvc.score;
-  movementSvc.start();
-  coinSvc.startCoinInterval();
+app.controller('gameCtrl', function ($scope, movementSvc, Socket, gridSvc, coinSvc){
+  socket.on('init', function (obj){
+    gridSvc.saveGrid(obj);
+    $scope.matrix = gridSvc.gridObj.grid;
+    $scope.overlayMatrix = gridSvc.gridObj.overlay;
+  })
+
+  socket.on('coinDrop', function (coins){
+    coinSvc.saveCoinPos(coins);
+    var totalCoins= coinSvc.returnCoins();
+    console.log('coin');
+    totalCoins.forEach(function (coin){
+      var x = coin[0];
+      var y = coin[1];
+      gridSvc.gridObj.grid[x][y] = 'coin';
+    }) 
+  })
+
+  $scope.score=0;
+
+  movementSvc.start(function (move){
+    socket.emit('move', {coord: move})
+  });
 })
 
-app.service('coinSvc', function ($interval, gameBoardSvc, $timeout){
-  var numCoinDrops = 5;
+app.service('gridSvc', function (){
+  this.gridObj;
+
+  this.saveGrid = function (obj){
+    var self = this;
+    self.gridObj = obj;
+  }
+})
+
+app.service('coinSvc', function (){
   var totalCoinPos;
 
-  this.startCoinInterval = function (){
-    var self = this;
-    $interval(function (){
-      self.createCoins();
-      self.dropCoins();
-      $timeout(function (){
-        self.removeCoins();
-      },1000);
-    }, 5000, 5);
+  this.saveCoinPos = function (coins){
+    totalCoinPos = coins;
   }
 
-  this.removeCoins = function (){
-    totalCoinPos.forEach(function (coin){
-      var x = coin[0];
-      var y = coin[1];
-      gameBoardSvc.grid[x][y] = null;
-    })
-  }
-
-  this.createCoins = function (){
-    totalCoinPos = [];
-    for (var i =0;i<numCoinDrops;i++){
-      var x = Math.floor(Math.random()*gameBoardSvc.gameSize);
-      var y = Math.floor(Math.random()*gameBoardSvc.gameSize);
-      var coinPos = [x,y];
-      totalCoinPos.push(coinPos);
-    }
-  }
-
-  this.dropCoins = function (){
-    totalCoinPos.forEach(function (coin){
-      var x = coin[0];
-      var y = coin[1];
-      gameBoardSvc.grid[x][y] = 'coin';
-    })
+  this.returnCoins = function (){
+    return totalCoinPos;
   }
 
 })

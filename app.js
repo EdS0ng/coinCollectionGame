@@ -6,6 +6,8 @@ var express = require('express');
 var http = require('http');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var gridSvc = require('./modules/grid');
+var coin = require('./modules/coin');
 
 var app = express();
 var server = http.Server(app);
@@ -23,14 +25,27 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-var history = [];
+gridSvc.buildGrid();
+gridSvc.buildOverlay();
+
 
 io.on('connection', function(socket) {
-  socket.emit('history', history);
+  console.log('connected')
+  gridSvc.setStartPosition();
+  socket.emit('init', {grid:gridSvc.grid, overlay:gridSvc.overlay});
 
-  socket.on('newMessage', function(message) {
-    history.push(message);
-    io.emit('message', message);
+  setInterval(function (){
+      var coins = coin.createCoins();
+      coin.dropCoins();
+      io.emit('coinDrop', coins);
+      setTimeout(function (){
+        coin.removeCoins();
+        io.emit('coinsRemoved');
+      },2000);
+    }, 5000);
+
+  socket.on('move', function(coordinates) {
+    console.log(coordinates);
   });
 });
 
